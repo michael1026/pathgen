@@ -79,6 +79,7 @@ func findPaths(rawUrl string, wordlist *[]string, extensions *[]string) {
 	preStatusParsed, _ := url.Parse(rawUrl)
 	preStatusParsed.Path = path.Join(preStatusParsed.Path, util.RandSeq(5))
 
+	fmt.Println(parsedUrl.Path[1:] + "/")
 	for _, word := range *wordlist {
 		for _, ext := range *extensions {
 			newPath := path.Join(parsedUrl.Path, word+ext)
