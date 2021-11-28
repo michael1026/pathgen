@@ -40,8 +40,18 @@ func main() {
 	s := bufio.NewScanner(os.Stdin)
 
 	for s.Scan() {
-		urlToAdd, _ := url.Parse(s.Text())
-		urlToAdd, _ = url.Parse(urlToAdd.Scheme + "://" + urlToAdd.Host + urlToAdd.Path)
+		urlToAdd, err := url.Parse(s.Text())
+
+		if err != nil {
+			continue
+		}
+
+		urlToAdd, err = url.Parse(urlToAdd.Scheme + "://" + urlToAdd.Host + urlToAdd.Path)
+
+		if err != nil {
+			continue
+		}
+
 		wordlist = wordsFromURL(wordlist, urlToAdd.Path)
 		root := urlToAdd.Scheme + "://" + urlToAdd.Host + "/"
 
